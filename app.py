@@ -45,7 +45,9 @@ def index():
 def addRecipe():
     """Allows the user to add a recipe to the database""" 
     if request.method == "POST":
-        return apology("Haven't Implemented this yet")
+        print(request.form.get("dishName"))
+        print(request.form.get("ingredient1"))
+        return render_template("addRecipe.html")
     return render_template("addRecipe.html")
 
 @app.route("/login", methods=["GET", "POST"])

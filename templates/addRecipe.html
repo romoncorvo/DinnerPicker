@@ -1,2 +1,105 @@
 {% extends "layout.html" %} {% block title %} Add Recipe {% endblock %} {% block
-main %} TODO {% endblock %}
+main %}
+<div class="container text-center">
+
+  <div class="row">
+    <div class="col">
+      <h1>Recipe</h1>
+    </div>
+  </div>
+
+  <form action="/addRecipe" method="post">
+
+  <div class="row mx-auto w-auto">
+    <div class="col input-group mb-1">
+        <input id="dishName" type="text" class="form-control" name="dishName" placeholder="Name of the dish">
+    </div>
+  </div>
+
+  <div class="row row-2">
+
+    <div class="col col-md-6">
+      <h2>Ingredients</h2>
+
+      <div id="addIngredients">
+
+        <div class="input-group mb-1">
+          <input id="ingredient1" name="ingredient1" type="text" class="form-control" aria-label="Ingredients" aria-describedby="basic-addon1">
+        </div>
+
+        <div class="input-group mb-1">
+          <input id="ingredient2" name="ingredient2" type="text" class="form-control" aria-label="Ingredients" aria-describedby="basic-addon1">
+        </div>
+
+        <div class="input-group mb-1">
+          <input id="ingredient3" name="ingredient3" type="text" class="form-control" aria-label="Ingredients" aria-describedby="basic-addon1">
+        </div>
+
+        <div class="input-group mb-1">
+          <input id="ingredient4" name="ingredient4" type="text" class="form-control" aria-label="Ingredients" aria-describedby="basic-addon1">
+        </div>
+
+      </div>
+      <button type="button" class="btn btn-secondary" id="addLineIngredients">Add Line</button>
+      <button type="button" class="btn btn-secondary" id="removeLineIngredients">Remove Line</button>
+    </div>
+
+    <div class="col col-md-6">
+      <h2>Steps</h2>
+
+      <div id="addSteps">
+
+        <div class="form-floating">
+          <textarea
+            class="form-control mb-1"
+            placeholder="Step 1"
+            id="step1"
+            name="step1"
+          ></textarea>
+          <label for="floatingTextarea"><b>1.</b></label>
+        </div>
+        
+        <div class="form-floating">
+          <textarea
+            class="form-control mb-1"
+            placeholder="Step 2"
+            id="step2"
+            name="step2"
+          ></textarea>
+          <label for="floatingTextarea"><b>2.</b></label>
+        </div>
+
+        <div class="form-floating">
+            <textarea
+              class="form-control mb-1"
+              placeholder="Step 3"
+              id="step3"
+              name="step3"
+            ></textarea>
+            <label for="floatingTextarea"><b>3.</b></label>
+          </div>
+
+          <div class="form-floating">
+            <textarea
+              class="form-control mb-1"
+              placeholder="Step 4"
+              id="step4"
+              name="step4"
+            ></textarea>
+            <label for="floatingTextarea"><b>4.</b></label>
+          </div>
+
+      </div>
+
+      <button type="button" class="btn btn-secondary" id="addLineSteps">Add Line</button>
+      <button type="button" class="btn btn-secondary" id="removeLineSteps">Remove Line</button>
+    </div>
+
+    <div class="row justify-content-md-center mx-auto w-auto">
+            <button type="submit" class="btn btn-primary">Add Recipe</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% endblock %}
