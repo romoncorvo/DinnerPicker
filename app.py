@@ -5,6 +5,7 @@ from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
+import random
 
 from helpers import apology, login_required
 
@@ -36,7 +37,16 @@ def after_request(response):
 def index():
     """Allows the user to randomly get a suggestion for dinner""" 
     if request.method == "POST":
-        return apology("Haven't Implemented this yet")
+        dishesId = db.execute("SELECT id FROM recipes WHERE user_id = ?", session["user_id"])
+        id = random.choice(dishesId)['id']
+
+        recipe = db.execute("SELECT * FROM recipes WHERE user_id = ? AND id = ? ", session["user_id"], id)[0]
+
+        ingredients = recipe['ingredients'].split("<\/>")
+        method = recipe['method'].split("<\/>")
+        dish = recipe['dish_name']
+
+        return render_template("index.html", dish=dish, ingredients=ingredients, method=method)
     return render_template("index.html")
 
 
@@ -45,8 +55,24 @@ def index():
 def addRecipe():
     """Allows the user to add a recipe to the database""" 
     if request.method == "POST":
-        print(request.form.get("dishName"))
-        print(request.form.get("ingredient1"))
+        dish = request.form.get("dishName")
+
+        i = 1
+        ingredients = []
+        while (ingredient := request.form.get("ingredient" + str(i))):
+            ingredients.append(ingredient)
+            i += 1
+
+        i = 1
+        method = []
+        while (step := request.form.get("step" + str(i))):
+            method.append(step)
+            i += 1
+
+        ingredients = "<\/>".join(ingredients)
+        method = "<\/>".join(method)
+        
+        db.execute("INSERT INTO recipes (user_id, dish_name, ingredients, method) VALUES(?, ?, ?, ?)", session["user_id"], dish, ingredients, method)
         return render_template("addRecipe.html")
     return render_template("addRecipe.html")
 

@@ -7,6 +7,11 @@ block main %}
     </div>
   </div>
 
+  <div class="row">
+    <div class="col">
+      <h1>{{ dish }}</h1>
+    </div>
+  </div>
   <div class="row justify-content-md-center mx-auto w-auto">
     <form action="/" method="post">
       <button type="submit" class="btn btn-success">Pick Random Dish</button>
@@ -16,21 +21,20 @@ block main %}
   <div class="row row-cols-2">
     <div class="col">
       <h2>Ingredients</h2>
+
       <ul class="list-group">
-        <li class="list-group-item">An item</li>
-        <li class="list-group-item">A second item</li>
-        <li class="list-group-item">A third item</li>
-        <li class="list-group-item">A fourth item</li>
-        <li class="list-group-item">And a fifth one</li>
+        {% for ingredient in ingredients %}
+        <li class="list-group-item">{{ ingredient }}</li>
+        {% endfor %}
       </ul>
     </div>
 
     <div class="col">
       <h2>Steps</h2>
       <ol class="list-group list-group-numbered">
-        <li class="list-group-item">A list item</li>
-        <li class="list-group-item">A list item</li>
-        <li class="list-group-item">A list item</li>
+        {% for step in method %}
+        <li class="list-group-item">{{ step }}</li>
+        {% endfor %}
       </ol>
     </div>
   </div>
